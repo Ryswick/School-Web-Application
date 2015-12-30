@@ -3,6 +3,8 @@
 
 <head>
     <title></title>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style/normalize.css">
     <link rel="stylesheet" href="style/style.css">
 </head>
@@ -14,18 +16,28 @@
             <input name="password" value="password" type="password" ng-model="user.password" />
             <button class="btnAuth" type="button" ng-click="login(user)">Login</button>
         </form>
-        <a href="#" ng-show="isLogged()" ng-click="logout()">Logout</a>
+        <div id="nav">
+            <div class="icons">
+                <a href="#/" ng-show="isLogged()"><i class="fa fa-home fa-2"></i></a>
+                <a href="#/profile" ng-show="isLogged()"><i class="fa fa-user fa-2"></i></a>
+                <a href="#/" ng-show="isLogged()" ng-click="logout()"><i class="fa fa-sign-out fa-2"></i></a>
+            </div>
+        </div>
         <form class="authForm" ng-show="!isLogged()">
             <input name="email" value="email" ng-model="newUser.email" />
             <input name="password" value="password" type="password" ng-model="newUser.password" />
             <button class="btnAuth" type="button" ng-click="createUser(newUser)">Create Account</button>
         </form>
+        <!-- This will contain all the admin commands such as adding data only for admins-->
+        <div ng-show="userRole=='admin' && isLogged()" ng-cloak>
+            Voici les commandes pour les admins
+        </div>
         <!-- Templates are inserted here -->
         <div ui-view ng-cloak>
         </div>
     </div>
     <!-- jQuery -->
-    <script src="script/jQuery-min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- AngularJS -->
     <script src="script/angular.min.js"></script>
     <!-- AngularUI router -->

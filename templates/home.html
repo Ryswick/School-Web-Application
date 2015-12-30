@@ -1,0 +1,17 @@
+<div ng-show="isLogged()" class="content">
+    <p>Liste de tous les villages de vacances du club</p>
+    <button ng-click="villagesVacances()" id="btn">Lister</button>
+    <pre id="listeVillage">
+  {{liste}}
+</pre>
+    <p>Liste de toutes les activités dans les villages</p>
+    <button ng-click="listeActivitesDansVillages()" id="btn">Lister</button>
+    <pre id="listeVillage">
+  {{listeActivitesDansLeVillage}}
+</pre>
+    <p>Listes de toutes les langues parlées dans les villages</p>
+    <button ng-click="languesVillages()" id="btn">Lister</button>
+    <pre id="listeVillage">
+  {{listeLanguesDansLesVillages}}
+</pre>
+</div>

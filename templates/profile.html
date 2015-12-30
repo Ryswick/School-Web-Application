@@ -1,0 +1,7 @@
+<p> Formulaire de changment de mot de passe</p>
+    <form class="passwordChangeForm">
+        <input name="email" value="email" placeholder="Email" ng-model="user.email" />
+        <input name="oldPassword" value="password" type="password" placeholder="Ancien mot de passe" ng-model="user.oldPassword" />
+        <input name="newPassword" value="password" placeholder="Nouveau mot de passe" type="password" ng-model="user.newPassword" />
+        <button class="btnAuth" type="button" ng-click="changePassword(user)">Change Password</button>
+    </form>
