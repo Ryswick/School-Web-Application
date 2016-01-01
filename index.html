@@ -12,8 +12,8 @@
 <body>
     <div id="container" ng-app="app" ng-controller="mainController" ng-cloak>
         <form class="authForm" ng-show="!isLogged()">
-            <input name="email" value="email" ng-model="user.email" />
-            <input name="password" value="password" type="password" ng-model="user.password" />
+            <input name="email" value="email" placeholder="Email" ng-model="user.email" />
+            <input name="password" value="password" type="password" placeholder="Mot de passe" ng-model="user.password" />
             <button class="btnAuth" type="button" ng-click="login(user)">Login</button>
         </form>
         <div id="nav">
@@ -24,13 +24,40 @@
             </div>
         </div>
         <form class="authForm" ng-show="!isLogged()">
-            <input name="email" value="email" ng-model="newUser.email" />
-            <input name="password" value="password" type="password" ng-model="newUser.password" />
+            <input name="email" value="email" placeholder="Email" ng-model="newUser.email" />
+            <input name="password" value="password" type="password" placeholder="Mot de passe" ng-model="newUser.password" />
             <button class="btnAuth" type="button" ng-click="createUser(newUser)">Create Account</button>
         </form>
         <!-- This will contain all the admin commands such as adding data only for admins-->
         <div ng-show="userRole=='admin' && isLogged()" ng-cloak>
-            Voici les commandes pour les admins
+            <p>Voici les commandes pour les admins</p>
+            <p> Ajouter un village </p>
+            <input name="village" value="village" placeholder="Nom du village" ng-model="newVillage" required/>
+            <select ng-model="newLangue" required>
+                <option disabled selected> -- select an option -- </option>
+                <option ng-repeat="item in langues" value="{{item.$id}}">{{item.designation}}</option>
+            </select>
+            <select ng-model="newActivite" required>
+                <option disabled selected> -- select an option -- </option>
+                <option ng-repeat="item in activites" value="{{item.$id}}">{{item.designation}}</option>
+            </select>
+            <select ng-model="gratuite" required>
+                <option disabled selected> -- select an option -- </option>
+                <option>true</option>
+                <option>false</option>
+            </select>
+            <button ng-click="ajouterVillage(newVillage, newLangue, newActivite, gratuite)">Ajouter le village</button>
+            <p>Modifier le rôle d'un utilisateur</p>
+            <select ng-model="selectedUser" required>
+                <option disabled selected> -- select an option -- </option>
+                <option ng-repeat="item in users" value="{{item.$id}}">{{item.email}}</option>
+            </select>
+            <select ng-model="role" required>
+                <option disabled selected> -- select an option -- </option>
+                <option>Admin</option>
+                <option>Utilisateur</option>
+            </select>
+            <button ng-click="changerRoleUtilisateur(selectedUser, role)">Modifier le role</button>
         </div>
         <!-- Templates are inserted here -->
         <div ui-view ng-cloak>

@@ -122,3 +122,8 @@ a .fa-2 {
 .icons {
     margin-right: 20px;
 }
+
+select{
+  color: #218199;
+  height: 44px;
+}

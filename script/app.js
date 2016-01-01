@@ -19,12 +19,12 @@ app.controller('mainController', function($scope, $rootScope, $firebaseObject, $
     // });
 
 
-    var addUser = function(userData) {
+    var addUser = function(userData, newUser) {
         userRef.child(userData.uid).set({
-            role: "admin"
+            email: newUser.email,
+            role: "user"
         });
     }
-
 
     /* Fonction pour créer un utilisateur */
     $scope.createUser = function(newUser) {
@@ -32,7 +32,7 @@ app.controller('mainController', function($scope, $rootScope, $firebaseObject, $
             email: newUser.email,
             password: newUser.password
         }).then(function(userData) {
-            addUser(userData);
+            addUser(userData, newUser);
             console.log("User " + userData.uid + " created successfully!");
         }).catch(function(error) {
             console.error(error);
@@ -62,7 +62,6 @@ app.controller('mainController', function($scope, $rootScope, $firebaseObject, $
         return $scope.auth.$getAuth();
     }
 
-    $scope.userRole = null;
 
     var userRole = function(role) {
         $scope.userRole = role;
@@ -83,6 +82,7 @@ app.controller('mainController', function($scope, $rootScope, $firebaseObject, $
         }
     }
 
+    isAdmin();
     /*Changement de mot de passe*/
     $scope.changePassword = function(user) {
         ref.changePassword({
@@ -193,6 +193,41 @@ app.controller('mainController', function($scope, $rootScope, $firebaseObject, $
         });
     }
 
+    $scope.villages = $firebaseArray(villageRef);
+    $scope.activites = $firebaseArray(activiteRef);
+    $scope.langues = $firebaseArray(langueRef);
+    $scope.users = $firebaseArray(userRef);
+
+    $scope.ajouterVillage = function(newVillage, newLangue, newActivite, gratuite) {
+
+        console.log(newLangue);
+        console.log(newActivite);
+        console.log(gratuite);
+
+
+        villageRef.push({
+            nom: newVillage,
+            "activite": {
+                [newActivite]: {
+                    "gratuite": gratuite
+                }
+            },
+            langue: {
+                [newLangue]: true
+            }
+        })
+    }
+
+    $scope.changerRoleUtilisateur = function(userID, userRole) {
+        console.log(userID);
+        if (userRole == "Admin")
+            userRole = "admin";
+        else
+            userRole = "user";
+        userRef.child(userID).update({
+            role: userRole
+        });
+    }
 
     $scope.listeActivitesDansVillages = function() {
         listerActivitesVillages();
