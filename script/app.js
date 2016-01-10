@@ -218,6 +218,16 @@ app.controller('mainController', function($scope, $rootScope, $firebaseObject, $
         })
     }
 
+    $scope.supprimerVillage = function(village) {
+        villageRef.child(village).remove();
+        paysRef.on("value", function(snapshot) {
+            snapshot.forEach(function(data) {
+                if (data.val().village[village] != null)
+                    paysRef.child(data.key() + "/village/" + village).remove();
+            });
+        });
+    }
+
     $scope.changerRoleUtilisateur = function(userID, userRole) {
         console.log(userID);
         if (userRole == "Admin")

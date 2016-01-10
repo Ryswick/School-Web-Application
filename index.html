@@ -58,7 +58,15 @@
                 <option>Utilisateur</option>
             </select>
             <button ng-click="changerRoleUtilisateur(selectedUser, role)">Modifier le role</button>
+
+            <p>Supprimer un Village</p>
+            <select ng-model="selectedVillage" required>
+                <option disabled selected> -- select an option -- </option>
+                <option ng-repeat="item in villages" value="{{item.$id}}">{{item.nom}}</option>
+            </select>
+            <button ng-click="supprimerVillage(selectedVillage)">Supprimer</button>
         </div>
+
         <!-- Templates are inserted here -->
         <div ui-view ng-cloak>
         </div>
